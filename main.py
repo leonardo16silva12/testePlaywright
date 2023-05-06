@@ -6,12 +6,10 @@ with sync_playwright() as p:
     navegador = p.chromium.launch(headless=False)  # headless -> modo segundo plano
     page = navegador.new_page()
     page.set_viewport_size({"width": GetSystemMetrics(0), "height": GetSystemMetrics(1)})
-
     page.goto("http://192.168.0.53:8080/troppus/vue/tab/tab658/form.do")
-
     page.keyboard.press('F11')
 
-    # Localiza os campos de entrada e botão e preenche-os
+    # LOGIN
     t1 = page.locator("input[name=id]")
     t1.fill("MASTER")
     time.sleep(2)
@@ -79,5 +77,12 @@ with sync_playwright() as p:
 
     t12 = page.locator("//span[normalize-space()='Confirmar']").click()
     time.sleep(2)
+
+    # LOGOUT
+    t13 = page.locator("//img[@src='/troppus/images/user_icon.png']").click()
+    time.sleep(2)
+
+    t14 = page.locator("//a[@id='btn-logout']").click()
+    time.sleep(5)
 
     page.close()
