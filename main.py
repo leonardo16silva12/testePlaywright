@@ -1,11 +1,10 @@
 from playwright.sync_api import sync_playwright
 import time
-from win32api import GetSystemMetrics
 
 with sync_playwright() as p:
     navegador = p.chromium.launch(headless=False)  # headless -> modo segundo plano
     page = navegador.new_page()
-    page.set_viewport_size({"width": GetSystemMetrics(0), "height": GetSystemMetrics(1)})
+    page.set_viewport_size({"width": 1280, "height": 720})
     page.goto("http://192.168.0.53:8080/troppus/vue/tab/tab658/form.do")
     page.keyboard.press('F11')
 
