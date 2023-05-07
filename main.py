@@ -2,10 +2,14 @@ from playwright.sync_api import sync_playwright
 import time
 
 with sync_playwright() as p:
-    navegador = p.chromium.launch(headless=False)  # headless -> modo segundo plano
+    navegador = p.chromium.launch(headless=False, args=["--start-maximized"])  # headless -> modo segundo plano
+    navegador.new_context(no_viewport=True)
     page = navegador.new_page()
-    page.set_viewport_size({"width": 1280, "height": 720})
+    page.set_viewport_size({"width": 1345, "height": 625})
+
+    # Abertura da URL
     page.goto("http://192.168.0.53:8080/troppus/vue/tab/tab658/form.do")
+    time.sleep(2)
 
     # LOGIN
     t1 = page.locator("input[name=id]")
